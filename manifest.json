@@ -1,6 +1,12 @@
 {
-    "name": "Getting Started Example",
+    "name": "Google Doc Reader",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "Reads the contents of google doc. ",
+    "background": {
+        "scripts": [
+            "background.js"
+        ],
+        "persistent": false
+    },
     "manifest_version": 2
-  }
+}
