@@ -3,6 +3,7 @@
     "version": "1.0",
     "description": "Reads the contents of google doc. ",
     "permissions": [
+        "activeTab",
         "declarativeContent",
         "storage"
     ],
@@ -21,6 +22,7 @@
             "128": "images/icon128.png"
         }
     },
+    "options_page": "options.html",
     "icons": {
         "16": "images/icon16.png",
         "32": "images/icon32.png",
