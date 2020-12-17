@@ -1,18 +1,41 @@
-let changeColor = document.getElementById('changeColor');
+const read = document.getElementById('read');
+const readBackwards = document.getElementById('readBackwards');
 
 chrome.storage.sync.get('color', function(data) {
-  changeColor.style.backgroundColor = data.color;
-  changeColor.setAttribute('value', data.color);
+  // read.style.backgroundColor = data.color;
+  // read.setAttribute('value', data.color);
 });
 
-changeColor.onclick = function(element) {
-  const synth = window.speechSynthesis;
-  const utter = new SpeechSynthesisUtterance('Can you read this?');
+read.onclick = function(element) {
+  const code = `
+  var doc = document.querySelector('.kix-page-content-wrapper');
+  var synth = window.speechSynthesis;
+  var textContent = doc.textContent;
+  var utter = new SpeechSynthesisUtterance(textContent);
   synth.speak(utter);
-    // let color = element.target.value;
-    // chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-    //   chrome.tabs.executeScript(
-    //       tabs[0].id,
-    //       {code: `document.body.style.backgroundColor = "${color}";`});
-    // });
+  `;
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+      chrome.tabs.executeScript(
+          tabs[0].id,
+          {code: code});
+    });
   };
+
+  readBackwards.onclick = function(element) {
+    const code = `
+    var doc = document.querySelector('.kix-page-content-wrapper');
+    var synth = window.speechSynthesis;
+    var textContent = doc.textContent;
+    var sentences = textContent.split('.')
+    sentences.reverse();
+    console.log(sentences);
+    textContent = sentences.map(ele => ele + '. ').join();
+    var utter = new SpeechSynthesisUtterance(textContent);
+    synth.speak(utter);
+    `;
+    chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+        chrome.tabs.executeScript(
+            tabs[0].id,
+            {code: code});
+      });
+    };
