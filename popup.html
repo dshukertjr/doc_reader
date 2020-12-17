@@ -2,24 +2,42 @@
 <html>
   <head>
     <style>
-      button {
-        outline: none;
-      }
-
       body {
         margin: 0;
         padding: 0;
-        border-radius: 8px;
-        border: 2px solid red;
-        overflow: hidden;
+        width: 100px;
+        height: 100px;
+      }
+
+      .flex {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+      }
+
+      #read {
+        padding: 3px 1px 3px 5px;
+        border-radius: 50%;
+        background-image: linear-gradient(#3ac9e9, #29cf00);
+      }
+
+      img {
+        display: block;
       }
     </style>
   </head>
   <body>
-    <button id="read">Read</button>
+    <div id="initial" class="flex">
+      <div id="read"><img src="images/play.svg" alt="play button" /></div>
+    </div>
+    <!-- <div id="playing">
+      <div id="pause"><img src="images/pause.svg" alt="pause button" /></div>
+      <div id="cancel"><img src="images/stop.svg" alt="cancel button" /></div>
+    </div>
     <button id="readBackwards">Read backwards</button>
     <button id="speedUp">Up</button>
-    <button id="speedDown">Down</button>
+    <button id="speedDown">Down</button> -->
     <script src="popup.js"></script>
   </body>
 </html>
