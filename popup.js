@@ -9,9 +9,12 @@ const speed = document.getElementById('speed');
 const speedUp = document.getElementById('speedUp');
 const speedDown = document.getElementById('speedDown');
 
+var speedValue;
+
 chrome.storage.sync.get('speed', (data) => {
-  const speedValue = Number.isNaN(Number.parseFloat(data)) ? '1.0' : data;
-  speed.textContent = speedValue;
+  console.log('data', data.speed);
+  speedValue = Number.isNaN(Number.parseFloat(data.speed)) ? 1 : data.speed;
+  setSpeedText();
 });
 
 const showInitial = () => {
@@ -63,23 +66,24 @@ cancel.onclick = function (element) {
 //   });
 // };
 
-// speedUp.onclick = function (element) {
-//   const code = `
-//   synth.cancel();
-//    // utter.rate = 2;
-// //    synth.resume();
-//     `;
-//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-//     chrome.tabs.executeScript(tabs[0].id, { code: code });
-//   });
-// };
+speedUp.onclick = function (element) {
+  speedValue += 0.1;
+  setSpeedText();
+};
 
-// speedDown.onclick = (element) => {
-//   const code = `
-//   utter.rate = 2;
-//     synth.speak(utter);
-//     `;
-//   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-//     chrome.tabs.executeScript(tabs[0].id, { code: code });
-//   });
-// };
+speedDown.onclick = (element) => {
+  speedValue -= 0.1;
+  setSpeedText();
+};
+
+const setSpeedText = () => {
+  speedValue = speedValue.clamp(0.5, 2.0);
+  chrome.storage.sync.set({ speed: speedValue }, () => {});
+  speed.textContent = `×${
+    speedValue == 1 || speedValue == 2 ? `${speedValue}.0` : speedValue
+  }`.substr(0, 4);
+};
+
+Number.prototype.clamp = function (min, max) {
+  return Math.min(Math.max(this, min), max);
+};
