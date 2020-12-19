@@ -454,3 +454,5 @@ function getPositionOfIndex(index, element, simulateElement) {
 //   },
 // };
 // })();
+
+console.log('****** done loading google docs util');

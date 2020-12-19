@@ -35,6 +35,7 @@ read.onclick = function (element) {
   var synth = window.speechSynthesis;
   var textContent = googleDocument.selectedText || doc.textContent;
   var utter = new SpeechSynthesisUtterance(textContent);
+  utter.rate = ${speedValue}
   synth.speak(utter);
   `;
   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
