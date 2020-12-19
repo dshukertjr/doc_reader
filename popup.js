@@ -35,14 +35,16 @@ const showPlaying = () => {
 };
 
 read.onclick = function (element) {
-  const reverseTextContentCode = `textContent = textContent.split('.').reverse().map(ele => ele + '. ').join();`;
+  const reverseTextContentCode = `textContent = (textContent + ' ').replace(/(\\?|\\.|\\!)/g, '$1$1').split(/[\\?|\\.|\\!]/).reverse().join();`;
   showPlaying();
   const code = `
   var googleDocument = getGoogleDocument();
   var doc = document.querySelector('.kix-page-content-wrapper');
   var synth = window.speechSynthesis;
   var textContent = googleDocument.selectedText || doc.textContent;
+  // console.log("${reverseTextContentCode}");
   ${readBackwards ? reverseTextContentCode : ''}
+  // console.log('textContent', textContent);
   var utter = new SpeechSynthesisUtterance(textContent);
   utter.rate = ${speedValue}
   synth.speak(utter);
