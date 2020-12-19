@@ -5,8 +5,9 @@
       body {
         margin: 0;
         padding: 0;
-        width: 100px;
-        height: 100px;
+        padding-bottom: 12px;
+        width: 150px;
+        text-align: center;
       }
 
       .flex {
@@ -16,28 +17,86 @@
         height: 100px;
       }
 
+      .spacer {
+        width: 8px;
+        height: 8px;
+      }
+
       #read {
         padding: 3px 1px 3px 5px;
+        background-color: #4484f4;
+      }
+
+      #cancel {
+        padding: 3px;
+      }
+
+      .round-button {
         border-radius: 50%;
-        background-image: linear-gradient(#3ac9e9, #29cf00);
+        transition: box-shadow 0.2s;
+        box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.1);
+      }
+
+      .round-button:hover {
+        box-shadow: none;
       }
 
       img {
         display: block;
       }
+
+      #playing {
+        display: none;
+      }
+
+      #speedControl {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #speed {
+        font-size: 16px;
+      }
     </style>
   </head>
   <body>
     <div id="initial" class="flex">
-      <div id="read"><img src="images/play.svg" alt="play button" /></div>
+      <div id="read" class="round-button">
+        <img src="images/play.svg" alt="play button" />
+      </div>
     </div>
-    <!-- <div id="playing">
-      <div id="pause"><img src="images/pause.svg" alt="pause button" /></div>
-      <div id="cancel"><img src="images/stop.svg" alt="cancel button" /></div>
+
+    <div id="playing" class="flex">
+      <div id="cancel" class="round-button">
+        <img src="images/stop.svg" alt="cancel button" />
+      </div>
     </div>
-    <button id="readBackwards">Read backwards</button>
-    <button id="speedUp">Up</button>
-    <button id="speedDown">Down</button> -->
+
+    <div id="control">
+      <div>
+        <input type="checkbox" id="readBackwards" name="readBackwards" />
+        <label for="readBackwards">Read Backwards</label>
+      </div>
+
+      <div class="spacer"></div>
+
+      <div id="speedControl">
+        <img
+          id="speedDown"
+          class="arrow"
+          src="images/arrow-left.svg"
+          alt="speed down"
+        />
+        <span id="speed">1.0</span>
+        <img
+          id="speedUp"
+          class="arrow"
+          src="images/arrow-right.svg"
+          alt="speed up"
+        />
+      </div>
+    </div>
     <script src="popup.js"></script>
   </body>
 </html>

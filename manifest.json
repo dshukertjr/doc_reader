@@ -2,6 +2,13 @@
     "name": "Google Doc Reader",
     "version": "1.0",
     "description": "Reads the contents of google doc. ",
+    "content_scripts": [
+        {
+          "js": ["googleDocsUtil.js"],
+          "matches": ["https://docs.google.com/document/*"],
+          "run_at": "document_idle"
+        }
+    ],
     "permissions": [
         "activeTab",
         "declarativeContent",
