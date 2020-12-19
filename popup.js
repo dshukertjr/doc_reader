@@ -21,7 +21,7 @@ chrome.storage.sync.get('speed', (data) => {
 chrome.storage.sync.get('readBackwards', (data) => {
   console.log('readBackwards', data.readBackwards);
   readBackwards = data.readBackwards || false;
-  readBackwardsCheckBox.checked = true;
+  readBackwardsCheckBox.checked = readBackwards;
 });
 
 const showInitial = () => {
